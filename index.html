@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="site.js" defer></script>
 <link rel="preload" as="image" href="img/keyart-wide-1600.webp" imagesrcset="img/keyart-wide-960.webp 960w, img/keyart-wide-1600.webp 1600w" imagesizes="100vw" media="(min-aspect-ratio: 1/1)">
 </head>
 <body>
@@ -26,6 +27,9 @@
       <img src="img/keyart-wide-1600.webp" srcset="img/keyart-wide-960.webp 960w, img/keyart-wide-1600.webp 1600w" sizes="100vw"
            width="1600" height="904" alt="A full moon over a misty pine forest at night, a dark house and a parked car on the ridge." fetchpriority="high">
     </picture>
+    <div class="torch" aria-hidden="true"></div>
+    <div class="eyes" aria-hidden="true"></div>
+    <p class="seen" aria-hidden="true">I see you</p>
     <div class="flicker" aria-hidden="true"></div>
     <div class="poster">
       <h1 class="title" id="title">UNINVITED<br>PRESENCE</h1>
@@ -39,7 +43,7 @@
 
   <section class="wrap" id="cases" aria-labelledby="cases-title">
     <div class="section-head">
-      <h2 id="cases-title">The cases</h2>
+      <h2 id="cases-title" tabindex="-1">The cases</h2>
       <hr class="rule">
       <p>Each story is inspired by a real account.</p>
     </div>

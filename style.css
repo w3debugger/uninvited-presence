@@ -65,7 +65,7 @@ h2 { font-weight: 400; font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: 
 .case { position: relative; aspect-ratio: 3 / 4.2; overflow: hidden; background: var(--night); border-top: 1px solid rgba(219,214,204,.25); }
 .case img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.72) brightness(.85); transition: filter .6s, transform .6s; }
 .case::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.94) 88%); }
-.case:hover img { filter: saturate(.9) brightness(1); transform: scale(1.03); }
+@media (hover: hover) { .case:hover img { filter: saturate(.9) brightness(1); transform: scale(1.03); } }
 .case .text { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 0 16px 16px; }
 .case .no { display: block; color: var(--blood-text); font-size: .85rem; letter-spacing: .06em; }
 .case h3 { margin: 2px 0 4px; font-weight: 400; text-transform: uppercase; letter-spacing: .04em; font-size: clamp(1.05rem, 2.2vw, 1.4rem); line-height: 1.15; }
@@ -109,6 +109,41 @@ footer nav a { margin: 0 12px; color: var(--ash); }
   .bar nav a { margin-left: 14px; }
   .bar .mark { font-size: .75rem; letter-spacing: .08em; }
 }
+/* Interactive layer (site.js adds .js). Atmosphere only: text never sits under it. */
+.torch, .eyes, .seen, .veil { pointer-events: none; }
+.torch { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 1.2s;
+  --x: 50%; --y: 40%; --r: clamp(150px, 24vmax, 340px);
+  background: radial-gradient(circle var(--r) at var(--x) var(--y), rgba(4,5,8,0), rgba(4,5,8,.2) 45%, rgba(4,5,8,.8)); }
+.js .torch { opacity: 1; }
+.eyes { position: absolute; left: 0; top: 0; z-index: 1; width: 3.2em; height: 1em; font-size: 10px; opacity: 0; transition: opacity 2.4s ease-in; }
+.eyes::before, .eyes::after { content: ""; position: absolute; top: .3em; width: .45em; height: .3em; border-radius: 50%; background: #e9dcc0; box-shadow: 0 0 .5em .15em rgba(233,220,192,.45); animation: blink 5s infinite; }
+.eyes::before { left: .7em; } .eyes::after { right: .7em; }
+.eyes.on { opacity: .75; }
+.eyes.gone { opacity: 0; transition: opacity .12s; }
+@keyframes blink { 0%, 93%, 100% { transform: none } 95% { transform: scaleY(.1) } }
+.seen { position: absolute; z-index: 1; margin: 0; font-style: italic; font-size: 1.1rem; letter-spacing: .1em; color: var(--blood-text); transform: scaleX(-1); opacity: 0; transition: opacity .5s; text-shadow: 0 0 8px #000; }
+.seen.on { opacity: .6; }
+.veil { position: fixed; inset: 0; z-index: 70; background: #000; opacity: 0; transition: opacity .45s; }
+.veil.on { opacity: 1; }
+.sound { display: block; margin: 22px auto 0; font: .85rem var(--serif); letter-spacing: .1em; color: var(--ash); background: rgba(5,5,6,.6); border: 1px solid rgba(219,214,204,.25); padding: 6px 12px; cursor: pointer; }
+.sound:hover, .sound[aria-pressed="true"] { color: var(--bone); border-color: var(--blood); }
+.sound svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+/* Cases wait in the dark and develop like a photo in a tray. */
+.js .case img { filter: grayscale(.9) brightness(.42) contrast(1.15) blur(.6px); transition: filter 1.6s ease-out, transform .6s; }
+.js .case .no { transition: text-shadow 1.2s, color 1.2s; }
+.js .case.dev img { filter: saturate(.9) brightness(1); }
+.js .case.dev { animation: shudder .5s linear; }
+.js .case.dev .no { color: #ff6f61; text-shadow: 0 0 10px rgba(217,77,66,.85); }
+@media (hover: hover) {
+  .js .case:hover img { filter: saturate(.9) brightness(1); }
+  .js .case:hover { animation: shudder .5s linear; }
+  .js .case:hover .no { color: #ff6f61; text-shadow: 0 0 10px rgba(217,77,66,.85); }
+}
+@keyframes shudder { 0%, 100% { transform: none; opacity: 1 } 15% { transform: translate(-2px, 1px) } 30% { transform: translate(2px, -1px); opacity: .75 } 45% { transform: translate(-1px, 0); opacity: 1 } 60% { transform: translate(1px, 1px) } }
+/* Privacy page: only a faint, slow flicker over the grain. */
+.flicker.page { position: fixed; inset: 0; z-index: 49; background: #000; opacity: 0; pointer-events: none; animation: flicker-soft 17s infinite; }
+@keyframes flicker-soft { 0%, 70%, 73%, 100% { opacity: 0 } 71% { opacity: .14 } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
