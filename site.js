@@ -100,7 +100,7 @@
     crawl: ['dust', .55, .45], bridge: ['shimmer', .55, .65]
   };
   cases.forEach(c => {
-    const img = c.querySelector('img'), f = fx[(img.getAttribute('src').match(/stage-(\w+)/) || [])[1]];
+    const img = c.querySelector('img'), f = img && fx[(img.getAttribute('src').match(/stage-(\w+)/) || [])[1]];
     if (!f) return;
     const el = d.createElement('i');
     el.className = 'fx ' + f[0]; el.setAttribute('aria-hidden', 'true');

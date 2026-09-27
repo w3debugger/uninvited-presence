@@ -274,6 +274,14 @@ footer nav a + a::before { content: ""; display: inline-block; width: 4px; heigh
 .peer.on { opacity: .8; } .peer.gone { opacity: 0; transition: opacity .12s; }
 .photo:has(.peer.on) span { opacity: .25; transition: opacity 2s; }
 
+/* The next case: no photo yet, only a redacted file and a stamp. */
+.open-case { grid-column: 1 / -1; aspect-ratio: auto; min-height: 150px; background: repeating-linear-gradient(-45deg, rgba(219,214,204,.03) 0 14px, transparent 14px 28px), var(--night); border: 1px dashed rgba(219,214,204,.25); }
+.open-case::after { display: none; }
+.open-case .text { position: relative; padding: 36px 16px 32px; text-align: center; }
+.open-case::before { content: "PENDING"; position: absolute; top: 50%; right: 6%; translate: 0 -50%; rotate: -12deg; padding: 4px 12px; font: 700 .9rem/1 "Courier New", monospace; letter-spacing: .24em; color: var(--blood-text); border: 3px double var(--blood); opacity: .8; }
+
+@media (max-width: 560px) { .open-case .text { padding-top: 64px; } .open-case::before { top: 22px; right: auto; left: 50%; translate: -50% 0; font-size: .75rem; } }
+
 @media (prefers-reduced-motion: reduce) {
   *:not(.case img, .gentle), *::before, *::after { animation: none !important; transition: none !important; }
   .fx { display: none; }   /* reduced motion keeps only the slow drift of the case photos */

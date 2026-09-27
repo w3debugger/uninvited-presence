@@ -25,26 +25,28 @@
 
 <table>
   <tr>
-    <td width="50%"><img src="img/stage-walls.webp" alt="A dark hallway with a single lamp glowing at the far end."><br><b>CASE 01 · The Walls</b><br><i>Finals week. Things keep moving.</i></td>
-    <td width="50%"><img src="img/stage-blinds.webp" alt="A hand at a moonlit window blind above a glowing laptop."><br><b>CASE 02 · The Blinds</b><br><i>Just a branch. Probably.</i></td>
+    <td width="50%"><img src="img/readme/stage-walls.jpg" alt="A dark hallway with a single lamp glowing at the far end."><br><b>CASE 01 · The Walls</b><br><i>Finals week. Things keep moving.</i></td>
+    <td width="50%"><img src="img/readme/stage-blinds.jpg" alt="A hand at a moonlit window blind above a glowing laptop."><br><b>CASE 02 · The Blinds</b><br><i>Just a branch. Probably.</i></td>
   </tr>
   <tr>
-    <td><img src="img/stage-blue.webp" alt="An open canister spilling glowing blue powder on a kitchen table."><br><b>CASE 03 · Blue Dust</b><br><i>It glows like sugar.</i></td>
-    <td><img src="img/stage-ridge.webp" alt="A pickup truck with its lights on, stopped on a dark mountain road."><br><b>CASE 04 · Ridge Road</b><br><i>Never stop on the ridge.</i></td>
+    <td><img src="img/readme/stage-blue.jpg" alt="An open canister spilling glowing blue powder on a kitchen table."><br><b>CASE 03 · Blue Dust</b><br><i>It glows like sugar.</i></td>
+    <td><img src="img/readme/stage-ridge.jpg" alt="A pickup truck with its lights on, stopped on a dark mountain road."><br><b>CASE 04 · Ridge Road</b><br><i>Never stop on the ridge.</i></td>
   </tr>
   <tr>
-    <td><img src="img/stage-call.webp" alt="A rotary telephone on a side table beside an apartment door."><br><b>CASE 05 · The Survey</b><br><i>Just a few questions, dear.</i></td>
-    <td><img src="img/stage-crawl.webp" alt="A sleeping bag and a small light in a low crawlspace under a house."><br><b>CASE 06 · Under the Floor</b><br><i>The house was booked every weekend.</i></td>
+    <td><img src="img/readme/stage-call.jpg" alt="A rotary telephone on a side table beside an apartment door."><br><b>CASE 05 · The Survey</b><br><i>Just a few questions, dear.</i></td>
+    <td><img src="img/readme/stage-crawl.jpg" alt="A sleeping bag and a small light in a low crawlspace under a house."><br><b>CASE 06 · Under the Floor</b><br><i>The house was booked every weekend.</i></td>
   </tr>
   <tr>
-    <td><img src="img/stage-bridge.webp" alt="A man and two boys under a highway bridge at sunset."><br><b>CASE 07 · Under the Bridge</b><br><i>Watch the little boy's face.</i></td>
-    <td><img src="img/stage-funeral.webp" alt="A casket in a dim funeral home room."><br><b>CASE 08 · The Sleepers</b><br><i>The freight elevator needs a key.</i></td>
+    <td><img src="img/readme/stage-bridge.jpg" alt="A man and two boys under a highway bridge at sunset."><br><b>CASE 07 · Under the Bridge</b><br><i>Watch the little boy's face.</i></td>
+    <td><img src="img/readme/stage-funeral.jpg" alt="A casket in a dim funeral home room."><br><b>CASE 08 · The Sleepers</b><br><i>The freight elevator needs a key.</i></td>
   </tr>
   <tr>
-    <td><img src="img/stage-watcher.webp" alt="A white house with a porch at dusk, a mailbox in the foreground."><br><b>CASE 09 · The Watcher</b><br><i>Welcome to the neighbourhood.</i></td>
-    <td><img src="img/stage-jungle.webp" alt="Two aircraft seats on the bank of a misty jungle river."><br><b>CASE 10 · Downstream</b><br><i>Follow the water.</i></td>
+    <td><img src="img/readme/stage-watcher.jpg" alt="A white house with a porch at dusk, a mailbox in the foreground."><br><b>CASE 09 · The Watcher</b><br><i>Welcome to the neighbourhood.</i></td>
+    <td><img src="img/readme/stage-jungle.jpg" alt="Two aircraft seats on the bank of a misty jungle river."><br><b>CASE 10 · Downstream</b><br><i>Follow the water.</i></td>
   </tr>
 </table>
+
+<p align="center"><b>More cases are under investigation.</b> New stories will be added in future updates.</p>
 
 ## What to expect
 
