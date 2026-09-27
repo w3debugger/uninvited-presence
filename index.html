@@ -4,30 +4,110 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Uninvited Presence: Support</title>
+<meta name="description" content="Support for Uninvited Presence, short horror stories for iPhone and iPad.">
+<meta name="theme-color" content="#050506">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="preload" as="image" href="img/keyart-wide-1600.webp" imagesrcset="img/keyart-wide-960.webp 960w, img/keyart-wide-1600.webp 1600w" imagesizes="100vw" media="(min-aspect-ratio: 1/1)">
 </head>
 <body>
-<main>
-  <nav><a href="./">Support</a><a href="privacy.html">Privacy</a></nav>
-  <h1>Uninvited Presence</h1>
-  <p class="lede">Short horror stories for iPhone and iPad.</p>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar">
+  <a class="mark" href="./">UNINVITED PRESENCE</a>
+  <nav aria-label="Site"><a href="./" aria-current="page">Support</a><a href="privacy.html">Privacy</a></nav>
+</header>
 
-  <h2>Getting help</h2>
-  <p>If something in the game doesn't work, or you're stuck, open an issue on the game's
-  <a href="https://github.com/w3debugger/uninvited-presence-pages/issues">GitHub issue page</a>. Please include your device model, iOS version, and the stage you were playing.</p>
+<main id="main">
+  <section class="hero" aria-labelledby="title">
+    <picture>
+      <source media="(max-aspect-ratio: 1/1)" srcset="img/keyart-tall-540.webp 540w, img/keyart-tall-900.webp 900w" sizes="100vw">
+      <img src="img/keyart-wide-1600.webp" srcset="img/keyart-wide-960.webp 960w, img/keyart-wide-1600.webp 1600w" sizes="100vw"
+           width="1600" height="904" alt="A full moon over a misty pine forest at night, a dark house and a parked car on the ridge." fetchpriority="high">
+    </picture>
+    <div class="flicker" aria-hidden="true"></div>
+    <div class="poster">
+      <h1 class="title" id="title">UNINVITED<br>PRESENCE</h1>
+      <hr class="rule">
+      <p class="tagline">They were never invited in.</p>
+      <p class="tagline">Short horror stories for iPhone and iPad.</p>
+      <a class="enter" href="#cases">ENTER</a>
+      <p class="soon"><span class="stamp">COMING SOON</span>to the App Store</p>
+    </div>
+  </section>
 
-  <h2>Controls</h2>
-  <ul>
-    <li>Drag with your left thumb to move. Drag farther to run.</li>
-    <li>Drag with your right thumb to look around.</li>
-    <li>Tap the pause button at the top right for settings, sound and camera speed.</li>
-  </ul>
+  <section class="wrap" id="cases" aria-labelledby="cases-title">
+    <div class="section-head">
+      <h2 id="cases-title">The cases</h2>
+      <hr class="rule">
+      <p>Each story is inspired by a real account.</p>
+    </div>
+    <ol class="cases">
+      <li class="case"><img src="img/stage-walls.webp" width="720" height="540" loading="lazy" alt="A dark hallway with a single lamp glowing at the far end."><div class="text"><span class="no">CASE 01</span><h3>The Walls</h3><p>Finals week. Things keep moving.</p></div></li>
+      <li class="case"><img src="img/stage-blinds.webp" width="720" height="540" loading="lazy" alt="A hand at a moonlit window blind above a glowing laptop."><div class="text"><span class="no">CASE 02</span><h3>The Blinds</h3><p>Just a branch. Probably.</p></div></li>
+      <li class="case"><img src="img/stage-blue.webp" width="720" height="540" loading="lazy" alt="An open canister spilling glowing blue powder on a kitchen table."><div class="text"><span class="no">CASE 03</span><h3>Blue Dust</h3><p>It glows like sugar.</p></div></li>
+      <li class="case"><img src="img/stage-ridge.webp" width="720" height="540" loading="lazy" alt="A pickup truck with its lights on, stopped on a dark mountain road."><div class="text"><span class="no">CASE 04</span><h3>Ridge Road</h3><p>Never stop on the ridge.</p></div></li>
+      <li class="case"><img src="img/stage-call.webp" width="720" height="540" loading="lazy" alt="A rotary telephone on a side table beside an apartment door."><div class="text"><span class="no">CASE 05</span><h3>The Survey</h3><p>Just a few questions, dear.</p></div></li>
+      <li class="case"><img src="img/stage-crawl.webp" width="540" height="540" loading="lazy" alt="A sleeping bag and a small light in a low crawlspace under a house."><div class="text"><span class="no">CASE 06</span><h3>Under the Floor</h3><p>The house was booked every weekend.</p></div></li>
+      <li class="case"><img src="img/stage-bridge.webp" width="540" height="540" loading="lazy" alt="A man and two boys under a highway bridge at sunset."><div class="text"><span class="no">CASE 07</span><h3>Under the Bridge</h3><p>Watch the little boy's face.</p></div></li>
+      <li class="case"><img src="img/stage-funeral.webp" width="540" height="540" loading="lazy" alt="A casket in a dim funeral home room."><div class="text"><span class="no">CASE 08</span><h3>The Sleepers</h3><p>The freight elevator needs a key.</p></div></li>
+      <li class="case"><img src="img/stage-watcher.webp" width="540" height="540" loading="lazy" alt="A white house with a porch at dusk, a mailbox in the foreground."><div class="text"><span class="no">CASE 09</span><h3>The Watcher</h3><p>Welcome to the neighbourhood.</p></div></li>
+      <li class="case"><img src="img/stage-jungle.webp" width="540" height="540" loading="lazy" alt="Two aircraft seats on the bank of a misty jungle river."><div class="text"><span class="no">CASE 10</span><h3>Downstream</h3><p>Follow the water.</p></div></li>
+    </ol>
+  </section>
 
-  <h2>Saving</h2>
-  <p>Progress is saved on your device as you play, and when you choose "Title screen" from the pause menu. Deleting the app deletes your progress.</p>
+  <div class="column" id="support">
+    <div class="section-head">
+      <h2>Support</h2>
+      <hr class="rule">
+    </div>
 
-  <footer>Uninvited Presence is a work of fiction. The stories are inspired by real accounts; names and places are invented.</footer>
+    <h3>Getting help</h3>
+    <p>If something in the game doesn't work, or you're stuck, open an issue on the game's
+    <a href="https://github.com/w3debugger/uninvited-presence-pages/issues">GitHub issue page</a>. Please include your device model, iOS version, and the case you were playing.</p>
+
+    <h3>Controls</h3>
+    <ul>
+      <li>Drag with your left thumb to move. Drag farther to run.</li>
+      <li>Drag with your right thumb to look around.</li>
+      <li>Tap the pause button at the top right for settings, sound and camera speed.</li>
+    </ul>
+
+    <h3>Saving</h3>
+    <p>Progress is saved on your device as you play, and when you choose "Title screen" from the pause menu. Deleting the app deletes your progress.</p>
+
+    <h3>Questions</h3>
+    <div class="faq">
+      <details>
+        <summary>Can I play in portrait?</summary>
+        <p>No. The game plays in landscape only, so turn your iPhone or iPad on its side.</p>
+      </details>
+      <details>
+        <summary>Why does a story need to download?</summary>
+        <p>Some stories download the first time you open them, which keeps the app small to install. Their case card says "download" and shows a progress bar while it runs. You need an internet connection for that first time; if it fails, tap "try again".</p>
+        <p>To free space later, open a downloaded story's card and tap "remove download", then tap again to confirm.</p>
+      </details>
+      <details>
+        <summary>Do I need Game Center?</summary>
+        <p>No, it is optional. If you are signed in to Game Center, surviving a case earns an achievement, and "achievements" under the case cards opens them. Without it, the game plays the same.</p>
+      </details>
+      <details>
+        <summary>How do I turn the sound off?</summary>
+        <p>Tap the speaker icon at the top right of any screen to mute or unmute. Settings also has volume sliders for music and ambience, and for footsteps and effects.</p>
+        <p>With sound on, the game takes over your device's audio, so music or videos from other apps stop. While it is muted, they keep playing.</p>
+      </details>
+      <details>
+        <summary>How do I reset my progress?</summary>
+        <p>On the title screen, open SETTINGS and tap "reset progress" at the bottom, then tap again within a few seconds to confirm. This clears the progress saved on this device.</p>
+      </details>
+    </div>
+  </div>
 </main>
+
+<footer>
+  <p>Uninvited Presence is a work of fiction. The stories are inspired by real accounts; names and places are invented.</p>
+  <nav aria-label="Footer"><a href="./">Support</a><a href="privacy.html">Privacy</a><a href="https://github.com/w3debugger/uninvited-presence-pages/issues">Contact</a></nav>
+</footer>
 </body>
 </html>
