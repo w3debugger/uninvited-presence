@@ -6,8 +6,9 @@
   const hero = d.querySelector('.hero'), torch = d.querySelector('.torch'),
     eyes = d.querySelector('.eyes'), seen = d.querySelector('.seen');
 
-  // Sound: off by default, all synthesized (no files). Built on the first "on".
-  let ac, bed, soundOn = false;
+  // Sound: off by default. The game's own title music (the music box, loaded only on the first "on") over a faint
+  // synthesized rumble, plus synthesized knocks, creaks and breath.
+  let ac, bed, music, soundOn = false;
   const noise = (secs, brown) => {
     const b = ac.createBuffer(1, ac.sampleRate * secs, ac.sampleRate), c = b.getChannelData(0);
     let last = 0;
@@ -49,9 +50,14 @@
       s.buffer = noise(6, true); s.loop = true; f.type = 'lowpass'; f.frequency.value = 380;
       hum.frequency.value = 49; hg.gain.value = .25;
       s.connect(f).connect(bed); hum.connect(hg).connect(bed); s.start(); hum.start();
+      music = ac.createGain(); music.gain.value = 0; music.connect(ac.destination);
+      fetch('menu_musicbox.mp3').then(r => r.arrayBuffer()).then(b => ac.decodeAudioData(b)).then(buf => {
+        const m = ac.createBufferSource(); m.buffer = buf; m.loop = true; m.connect(music); m.start();   // a buffer loops seamlessly, like the game
+      }).catch(() => {});
     }
     soundOn = !soundOn; ac.resume();
-    bed.gain.setTargetAtTime(soundOn ? .09 : 0, ac.currentTime, .6);
+    bed.gain.setTargetAtTime(soundOn ? .035 : 0, ac.currentTime, .6);
+    music.gain.setTargetAtTime(soundOn ? .5 : 0, ac.currentTime, .8);
     label(); if (soundOn) knock(3);
   };
   label(); d.querySelector('.soon').after(btn);
