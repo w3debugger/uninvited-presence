@@ -178,9 +178,6 @@ h2[data-tag]::before { content: attr(data-tag); display: block; width: max-conte
   font: 700 .72rem/1 "Courier New", monospace; letter-spacing: .2em; color: #241a12; transform: rotate(-3deg);
   background: radial-gradient(circle at 9px 50%, var(--black) 2.5px, #cbbf9f 3.2px);
   clip-path: polygon(0 0, 100% 0, 96% 22%, 100% 44%, 95% 63%, 99% 82%, 96% 100%, 0 100%); }
-/* Found footage REC light and timecode (the dot blinks once a second). */
-.rec { position: absolute; left: 16px; top: 64px; z-index: 2; font: .78rem/1 "Courier New", monospace; letter-spacing: .14em; color: rgba(219,214,204,.7); pointer-events: none; }
-.rec i { display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: #e0271d; box-shadow: 0 0 6px rgba(224,39,29,.8); animation: caret 1s steps(1) infinite; }
 /* Depth layers behind the page (site.js moves them on scroll). Content sits above them. */
 main, footer { position: relative; z-index: 1; }
 .depth { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }

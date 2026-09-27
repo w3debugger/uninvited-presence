@@ -137,16 +137,6 @@
   }));
   [hero, d.querySelector('footer'), ...cases].forEach(el => liveIo.observe(el));
 
-  // Found footage: a REC light and a running timecode in the corner of the hero.
-  const rec = d.createElement('div'), t0 = Date.now(), two = n => String(n | 0).padStart(2, '0');
-  rec.className = 'rec'; rec.setAttribute('aria-hidden', 'true'); rec.innerHTML = '<i></i>REC <span>00:00:00</span>';
-  hero.append(rec);
-  setInterval(() => {
-    if (!hero.classList.contains('on') || calm) return;
-    const s = (Date.now() - t0) / 1000;
-    rec.lastChild.textContent = `${two(s / 3600)}:${two(s / 60 % 60)}:${two(s % 60)}`;
-  }, 1000);
-
   // Depth: falling ash, a far tree line, a fog band and a near tree line behind the page, each at its own speed as you
   // scroll (and a little with the mouse). The key art, moon and all, drifts slower than the content. Half as much with
   // reduced motion.
