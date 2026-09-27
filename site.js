@@ -85,12 +85,99 @@
     });
   }
 
+  // Cases are alive, like a live photo: every still drifts slowly and one small detail lives over its light.
+  // [effect, x, y, size, rgb, seconds]: x and y are fractions of the card. Only on-screen cards animate.
+  const fx = {
+    walls: ['rain'], ridge: ['fog'], call: ['snow'], jungle: ['fireflies'],
+    blinds: ['glow', .68, .16, 60, '185,240,235', 13], blue: ['glow pulse', .55, .7, 60, '110,190,255', 3.6],
+    funeral: ['glow', .15, .35, 30, '255,210,150', 7], watcher: ['glow', .45, .53, 22, '255,200,120', 9],
+    crawl: ['dust', .55, .45], bridge: ['shimmer', .55, .65]
+  };
+  cases.forEach(c => {
+    const img = c.querySelector('img'), f = fx[(img.getAttribute('src').match(/stage-(\w+)/) || [])[1]];
+    if (!f) return;
+    const el = d.createElement('i');
+    el.className = 'fx ' + f[0]; el.setAttribute('aria-hidden', 'true');
+    if (f[1] != null) el.style.cssText = `--x:${f[1] * 100}%;--y:${f[2] * 100}%;--s:${f[3]}%;--c:${f[4]};--d:${f[5]}s`;
+    if (f[0] == 'fireflies') for (let i = 0; i < 7; i++) {
+      const b = d.createElement('b');
+      b.style.cssText = `left:${10 + Math.random() * 75}%;top:${20 + Math.random() * 45}%;animation-duration:${5 + Math.random() * 4}s;animation-delay:${-Math.random() * 8}s`;
+      el.append(b);
+    }
+    img.after(el);
+  });
+  // "Pause motion" stops everything that moves on its own (and the parallax) and is remembered.
+  let calm = false;
+  try { calm = localStorage.getItem('up-motion') === 'off'; } catch (e) {}
+  const casesHead = d.querySelector('#cases .section-head'), motion = d.createElement('button');
+  motion.className = 'sound motion'; motion.type = 'button';
+  const motionLabel = () => {
+    root.classList.toggle('calm', calm); motion.setAttribute('aria-pressed', calm);
+    motion.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true">' + (calm ? '<path d="M4 3l9 5-9 5z"/>' : '<path d="M5 3v10M11 3v10"/>') + '</svg>' + (calm ? 'Play motion' : 'Pause motion');
+  };
+  motion.onclick = () => { calm = !calm; motionLabel(); queue(); try { localStorage.setItem('up-motion', calm ? 'off' : 'on'); } catch (e) {} };
+
+  // A typewriter files each case number as its card comes into view (numbers only, never a total).
+  const files = d.createElement('p');
+  files.className = 'files'; files.setAttribute('aria-hidden', 'true'); files.innerHTML = 'CASE FILES <span></span><i></i>';
+  const typed = files.firstElementChild, filed = new Set();
+  let typing = 0;
+  const type = () => {
+    const want = [...filed].sort().join(' '), have = typed.textContent;
+    if (have == want) { clearInterval(typing); typing = 0; return; }
+    typed.textContent = want.startsWith(have) ? want.slice(0, have.length + 1) : have.slice(0, -1);
+  };
+  motionLabel(); casesHead.append(files, motion);
+
+  // Only what is on screen animates: cards, the hero and the footer get .on while visible.
+  const liveIo = new IntersectionObserver(es => es.forEach(e => {
+    e.target.classList.toggle('on', e.isIntersecting);
+    const no = e.isIntersecting && e.target.matches('.case') && e.target.querySelector('.no');
+    if (no) { filed.add(no.textContent.slice(-2)); if (!typing) typing = setInterval(type, 70); }
+  }));
+  [hero, d.querySelector('footer'), ...cases].forEach(el => liveIo.observe(el));
+
+  // Found footage: a REC light and a running timecode in the corner of the hero.
+  const rec = d.createElement('div'), t0 = Date.now(), two = n => String(n | 0).padStart(2, '0');
+  rec.className = 'rec'; rec.setAttribute('aria-hidden', 'true'); rec.innerHTML = '<i></i>REC <span>00:00:00</span>';
+  hero.append(rec);
+  setInterval(() => {
+    if (!hero.classList.contains('on') || calm) return;
+    const s = (Date.now() - t0) / 1000;
+    rec.lastChild.textContent = `${two(s / 3600)}:${two(s / 60 % 60)}:${two(s % 60)}`;
+  }, 1000);
+
+  // Depth: falling ash, a far tree line, a fog band and a near tree line behind the page, each at its own speed as you
+  // scroll (and a little with the mouse). The key art, moon and all, drifts slower than the content. Half as much with
+  // reduced motion.
+  const depth = d.createElement('div'), art = hero.querySelector('picture'), k = still ? .5 : 1;
+  depth.className = 'depth'; depth.setAttribute('aria-hidden', 'true');
+  depth.innerHTML = '<i class="ash"></i><i class="far"></i><i class="fogband"><b class="gentle"></b></i><i class="near"></i>';
+  d.body.prepend(depth);
+  const [ash, far, fogBand, near] = depth.children;
+  let mx = 0, frame = false, artShift = 0;
+  const move = (el, x, y) => { el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`; };
+  const paint = () => {
+    frame = false;
+    if (calm) return;
+    const y = scrollY, p = Math.min(1, y / Math.max(1, root.scrollHeight - innerHeight));
+    if (y < hero.offsetHeight) { artShift = y * .3 * k; move(art, -mx * 8, artShift); }
+    move(ash, mx * 16, -(y * .25 * k % 360));
+    move(far, mx * 6, (1 - p) * 40 * k);
+    move(fogBand, 0, (1 - p) * 60 * k);
+    move(near, mx * 14, (1 - p) * 110 * k);
+  };
+  const queue = () => { if (!frame) { frame = true; requestAnimationFrame(paint); } };
+  addEventListener('scroll', queue, { passive: true }); addEventListener('resize', queue);
+  if (!still && matchMedia('(hover: hover)').matches) addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; queue(); }, { passive: true });
+  queue();
+
   // Map a point on the key art (0..1 of the picture) to the hero, matching object-fit: cover at 50% 35%.
   const artPoint = () => {
     const tall = /tall/.test(hero.querySelector('img').currentSrc), w = tall ? 900 : 1600, h = tall ? 1593 : 904,
       W = hero.clientWidth, H = hero.clientHeight, s = Math.max(W / w, H / h);
     const [px, py] = tall ? [.13, .35] : [.7925, .492];
-    return [px * w * s + (W - w * s) * .5, py * h * s + (H - h * s) * .35, s];
+    return [px * w * s + (W - w * s) * .5, py * h * s + (H - h * s) * .35 + artShift, s];
   };
 
   // Flashlight: follows the pointer or finger over the hero, painted once per frame at most.

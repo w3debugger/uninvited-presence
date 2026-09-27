@@ -43,7 +43,7 @@
 
   <section class="wrap" id="cases" aria-labelledby="cases-title">
     <div class="section-head">
-      <h2 id="cases-title" tabindex="-1">The cases</h2>
+      <h2 id="cases-title" tabindex="-1" data-tag="Evidence">The cases</h2>
       <hr class="rule">
       <p>Each story is inspired by a real account.</p>
     </div>
@@ -63,7 +63,7 @@
 
   <div class="column" id="support">
     <div class="section-head">
-      <h2>Support</h2>
+      <h2 data-tag="Field notes">Support</h2>
       <hr class="rule">
     </div>
 
@@ -110,6 +110,18 @@
 </main>
 
 <footer>
+  <div class="scene">
+    <svg class="house" viewBox="0 0 260 150" aria-hidden="true">
+      <defs><radialGradient id="sky"><stop offset="0" stop-color="#1c2535"/><stop offset="1" stop-color="#1c2535" stop-opacity="0"/></radialGradient>
+      <radialGradient id="halo"><stop offset="0" stop-color="#ffc977" stop-opacity=".5"/><stop offset="1" stop-color="#ffc977" stop-opacity="0"/></radialGradient></defs>
+      <ellipse cx="130" cy="84" rx="130" ry="70" fill="url(#sky)"/>
+      <path fill="#020203" d="M40 150v-42l20-8V72l70-44 36 22V36h10v20l24 16v28l20 8v42z"/>
+      <g fill="#0d0f14"><rect x="88" y="78" width="14" height="18"/><rect x="158" y="78" width="14" height="18"/><rect x="90" y="116" width="16" height="20"/><rect x="154" y="116" width="16" height="20"/><rect x="122" y="112" width="16" height="30"/></g>
+      <g class="win"><circle cx="165" cy="87" r="34" fill="url(#halo)"/><rect x="158" y="78" width="14" height="18" fill="#f0c27a"/>
+      <g class="who" fill="#1c130a"><circle cx="165" cy="85" r="2.6"/><path d="M160 96v-4.2c0-2.4 2.2-3.6 5-3.6s5 1.2 5 3.6V96z"/></g></g>
+    </svg>
+    <p>They were never invited in.</p>
+  </div>
   <p>Uninvited Presence is a work of fiction. The stories are inspired by real accounts; names and places are invented.</p>
   <nav aria-label="Footer"><a href="./">Support</a><a href="privacy.html">Privacy</a><a href="https://github.com/w3debugger/uninvited-presence-pages/issues">Contact</a></nav>
 </footer>

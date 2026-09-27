@@ -128,8 +128,92 @@ footer nav a { margin: 0 12px; color: var(--ash); }
 .sound { display: block; margin: 22px auto 0; font: .85rem var(--serif); letter-spacing: .1em; color: var(--ash); background: rgba(5,5,6,.6); border: 1px solid rgba(219,214,204,.25); padding: 6px 12px; cursor: pointer; }
 .sound:hover, .sound[aria-pressed="true"] { color: var(--bone); border-color: var(--blood); }
 .sound svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; fill: none; stroke: currentColor; stroke-width: 1.6; }
-/* Cases wait in the dark and develop like a photo in a tray. */
-.js .case img { filter: grayscale(.9) brightness(.42) contrast(1.15) blur(.6px); transition: filter 1.6s ease-out, transform .6s; }
+/* Cases are alive like a live photo (a slow drift plus one detail over the light) and develop fully on hover or tap. */
+.js .case img { filter: saturate(.8) brightness(.8); transition: filter 1.6s ease-out; animation: drift 12s ease-in-out infinite alternate; }
+.js .case:nth-child(even) img { animation-duration: 14s; animation-delay: -5s; transform-origin: 30% 60%; }
+.js .case:nth-child(3n) img { animation-duration: 10s; transform-origin: 70% 40%; }
+@keyframes drift { from { transform: scale(1.02) } to { transform: scale(1.05) translate(-1%, -.6%) } }
+.fx { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.fx::before, .fx::after { content: ""; position: absolute; }
+.glow, .dust, .shimmer { z-index: 1; }   /* lights sit above the card's dark gradient; the text stays on top */
+.glow::before { left: var(--x); top: var(--y); width: var(--s); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(var(--c), .55), rgba(var(--c), .12) 45%, rgba(var(--c), 0)); animation: lamp var(--d) infinite; }
+.glow.pulse::before { animation: pulse var(--d) ease-in-out infinite alternate; }
+@keyframes lamp { 0%, 100% { opacity: .6 } 38% { opacity: .7 } 40% { opacity: .15 } 41% { opacity: .65 } 43% { opacity: .2 } 46% { opacity: .7 } 78% { opacity: .5 } 80% { opacity: .3 } 82% { opacity: .6 } }
+@keyframes pulse { from { opacity: .2 } to { opacity: .95 } }
+/* Rain, snow and dust: tiled layers moved by one whole period (tile heights divide 360px), so the loop has no seam. */
+.rain::before { left: -30%; right: -30%; top: -360px; bottom: 0; opacity: .45;
+  background: radial-gradient(1px 12px, rgba(205,220,235,.6), transparent) 0 0 / 37px 60px, radial-gradient(1px 18px, rgba(205,220,235,.4), transparent) 13px 31px / 59px 90px, radial-gradient(1px 9px, rgba(205,220,235,.4), transparent) 7px 77px / 23px 120px;
+  animation: rain .8s linear infinite; }
+@keyframes rain { from { transform: rotate(8deg) translateY(0) } to { transform: rotate(8deg) translateY(360px) } }
+.snow::before { left: -30%; right: -30%; top: -360px; bottom: 0; opacity: .7;
+  background: radial-gradient(circle 1.5px, rgba(240,240,245,.8), transparent) 0 0 / 67px 90px, radial-gradient(circle 1px, rgba(240,240,245,.7), transparent) 23px 41px / 43px 60px, radial-gradient(circle 2px, rgba(240,240,245,.5), transparent) 51px 17px / 113px 120px, radial-gradient(circle 1px, rgba(240,240,245,.6), transparent) 7px 101px / 89px 180px;
+  animation: snow 18s linear infinite; }
+@keyframes snow { from { transform: rotate(-12deg) } to { transform: rotate(-12deg) translateY(360px) } }
+.dust { -webkit-mask: radial-gradient(circle at var(--x) var(--y), #000 10%, transparent 55%); mask: radial-gradient(circle at var(--x) var(--y), #000 10%, transparent 55%); }
+.dust::before { left: -30%; right: -30%; top: 0; bottom: -360px;
+  background: radial-gradient(circle 1.2px, rgba(255,238,200,1), transparent) 0 0 / 41px 60px, radial-gradient(circle 1.6px, rgba(255,238,200,.8), transparent) 11px 37px / 59px 90px, radial-gradient(circle 1px, rgba(255,238,200,.9), transparent) 29px 13px / 73px 120px;
+  animation: dust 45s linear infinite; }
+@keyframes dust { from { transform: rotate(14deg) } to { transform: rotate(14deg) translateY(-360px) } }
+.shimmer { -webkit-mask: radial-gradient(48% 11% at var(--x) var(--y), #000 30%, transparent); mask: radial-gradient(48% 11% at var(--x) var(--y), #000 30%, transparent); }
+.shimmer::before, .shimmer::after { inset: 0 -12px; background: radial-gradient(4px 1px, rgba(255,232,175,.8), transparent) 0 0 / 23px 9px, radial-gradient(6px 1px, rgba(255,232,175,.55), transparent) 11px 5px / 41px 14px; animation: glint 1.6s ease-in-out infinite alternate; }
+.shimmer::after { background: radial-gradient(7px 1px, rgba(255,240,200,.6), transparent) 9px 4px / 31px 12px, radial-gradient(3px 1px, rgba(255,240,200,.8), transparent) 17px 2px / 19px 8px; animation-delay: -.8s; }
+@keyframes glint { from { opacity: .05; transform: translateX(-6px) } to { opacity: .7; transform: translateX(6px) } }
+.fog::before, .fog::after { left: 0; width: 200%; top: 35%; height: 45%;
+  background: radial-gradient(18% 50% at 25% 50%, rgba(195,200,205,.2), transparent 70%) 0 0 / 50% 100%, radial-gradient(22% 40% at 75% 60%, rgba(195,200,205,.16), transparent 70%) 0 0 / 50% 100%;
+  animation: fog 36s linear infinite; }
+.fog::after { top: 55%; animation-duration: 52s; animation-direction: reverse; opacity: .8; }
+@keyframes fog { to { transform: translateX(-50%) } }
+.fireflies b { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #f2ffb4; box-shadow: 0 0 6px 2px rgba(215,255,120,.55); opacity: 0; animation: fly 6s ease-in-out infinite; }
+@keyframes fly { 0%, 100% { opacity: 0; transform: none } 30% { opacity: .9 } 50% { transform: translate(10px, -8px) } 65% { opacity: .15 } 80% { opacity: .7; transform: translate(16px, 2px) } }
+/* Only what is on screen animates (site.js adds .on); "Pause motion" stops everything. */
+.js :is(.hero, footer, .case):not(.on) *, .js :is(.hero, footer, .case):not(.on) *::before, .js :is(.hero, footer, .case):not(.on) *::after,
+.calm *, .calm *::before, .calm *::after { animation-play-state: paused !important; }
+.sound.motion { margin-top: 14px; }
+.files { margin: 14px 0 0; font: .78rem/1 "Courier New", monospace; letter-spacing: .18em; color: rgba(219,214,204,.45); }
+.files i { display: inline-block; width: .55em; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--blood-text); animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0 } }
+/* Evidence tag on section headings: a torn paper label with a punched hole. */
+h2[data-tag]::before { content: attr(data-tag); display: block; width: max-content; margin: 0 auto 12px; padding: 5px 16px 5px 20px;
+  font: 700 .72rem/1 "Courier New", monospace; letter-spacing: .2em; color: #241a12; transform: rotate(-3deg);
+  background: radial-gradient(circle at 9px 50%, var(--black) 2.5px, #cbbf9f 3.2px);
+  clip-path: polygon(0 0, 100% 0, 96% 22%, 100% 44%, 95% 63%, 99% 82%, 96% 100%, 0 100%); }
+/* Found footage REC light and timecode (the dot blinks once a second). */
+.rec { position: absolute; left: 16px; top: 64px; z-index: 2; font: .78rem/1 "Courier New", monospace; letter-spacing: .14em; color: rgba(219,214,204,.7); pointer-events: none; }
+.rec i { display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: #e0271d; box-shadow: 0 0 6px rgba(224,39,29,.8); animation: caret 1s steps(1) infinite; }
+/* Depth layers behind the page (site.js moves them on scroll). Content sits above them. */
+main, footer { position: relative; z-index: 1; }
+.depth { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.depth > * { position: absolute; left: -40px; right: -40px; will-change: transform; }
+.ash { top: 0; height: calc(100% + 360px); opacity: .5; }
+.ash::before { content: ""; position: absolute; inset: -360px 0 0;
+  background: radial-gradient(circle 1px, rgba(200,195,185,.7), transparent) 0 0 / 53px 90px, radial-gradient(circle 1.4px, rgba(200,195,185,.45), transparent) 31px 47px / 97px 120px, radial-gradient(circle 1px, rgba(200,195,185,.5), transparent) 13px 101px / 71px 180px;
+  animation: ash 30s linear infinite; }
+@keyframes ash { from { transform: rotate(-6deg) } to { transform: rotate(-6deg) translateY(360px) } }
+.far, .near { bottom: -120px; background-repeat: repeat-x; background-position: 0 100%; }
+.far { opacity: .7; height: calc(13vh + 120px); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' preserveAspectRatio='none'%3E%3Cpath fill='%23121720' d='M0 100V92L0 94L0 71L0 71L0 55L0 55L0 40L4 55L2 55L7 71L3 71L9 94L2 94L10 70L6 70L12 53L9 53L14 37L20 53L17 53L23 70L19 70L27 94L15 94L20 67L17 67L21 48L19 48L23 30L27 48L25 48L29 67L26 67L31 94L25 94L31 65L27 65L32 44L30 44L34 24L39 44L36 44L41 65L38 65L44 94L37 94L46 72L41 72L48 57L45 57L51 42L58 57L54 57L61 72L56 72L65 94L57 94L63 70L60 70L65 53L62 53L66 37L71 53L68 53L73 70L70 70L75 94L72 94L79 68L75 68L81 50L78 50L84 33L89 50L86 50L92 68L88 68L95 94L89 94L94 68L91 68L96 50L93 50L98 32L102 50L99 50L104 68L101 68L106 94L101 94L107 79L104 79L109 68L106 68L111 58L116 68L113 68L118 79L115 79L121 94L117 94L125 69L120 69L126 51L123 51L129 34L134 51L131 51L137 69L133 69L140 94L136 94L144 66L139 66L146 46L142 46L149 27L155 46L151 46L158 66L153 66L162 94L152 94L161 73L156 73L163 58L159 58L166 43L172 58L168 58L176 73L171 73L179 94L175 94L184 78L179 78L186 66L182 66L189 56L196 66L192 66L199 78L194 78L203 94L190 94L196 65L193 65L198 44L195 44L200 25L204 44L202 44L207 65L203 65L209 94L203 94L210 75L206 75L212 61L209 61L215 48L221 61L217 61L224 75L219 75L227 94L219 94L226 74L222 74L228 60L225 60L230 47L235 60L232 60L238 74L234 74L241 94L234 94L242 66L238 66L244 46L241 46L247 27L252 46L249 46L255 66L251 66L259 94L252 94L262 67L256 67L264 47L260 47L267 29L274 47L270 47L277 67L272 67L281 94L277 94L285 77L280 77L287 65L283 65L290 53L296 65L292 65L299 77L294 77L302 94L297 94L307 66L301 66L309 46L305 46L312 27L319 46L315 46L323 66L317 66L327 94L318 94L326 76L321 76L328 63L325 63L331 52L337 63L333 63L340 76L336 76L344 94L338 94L346 75L342 75L348 62L345 62L350 49L356 62L353 62L359 75L355 75L362 94L351 94L360 65L355 65L362 44L358 44L365 24L372 44L368 44L375 65L370 65L379 94L366 94L374 73L370 73L377 58L373 58L379 45L386 58L382 58L389 73L384 73L393 94L381 94L387 68L384 68L389 49L386 49L391 32L396 49L393 49L398 68L395 68L400 94L397 94L400 70L399 70L400 53L400 53L400 37L400 53L400 53L400 70L400 70L400 94L400 94L400 74L400 74L400 60L400 60L400 47L400 60L400 60L400 74L400 74L400 94V100Z'/%3E%3C/svg%3E"); background-size: 860px calc(100% - 120px); background-position: 0 0; }
+.near { height: calc(10vh + 120px); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' preserveAspectRatio='none'%3E%3Cpath fill='%23020203' d='M0 100V92L0 94L0 56L0 56L0 29L0 29L0 3L4 29L2 29L6 56L3 56L9 94L0 94L9 70L4 70L11 52L7 52L13 36L20 52L16 52L23 70L18 70L26 94L16 94L25 68L20 68L28 49L23 49L31 31L38 49L34 49L41 68L36 68L46 94L37 94L45 64L40 64L46 42L43 42L49 22L54 42L51 42L57 64L53 64L60 94L52 94L58 58L55 58L60 32L57 32L62 8L66 32L64 32L69 58L65 58L71 94L62 94L69 71L65 71L70 54L67 54L72 38L77 54L74 54L79 71L75 71L82 94L74 94L81 57L77 57L82 30L79 30L85 6L90 30L87 30L92 57L89 57L96 94L88 94L93 67L90 67L95 48L92 48L96 29L101 48L98 48L103 67L100 67L105 94L102 94L108 61L105 61L109 38L107 38L111 16L115 38L113 38L117 61L114 61L119 94L113 94L121 66L117 66L123 45L120 45L126 26L132 45L128 45L135 66L130 66L138 94L132 94L139 61L135 61L141 37L138 37L143 15L149 37L146 37L152 61L147 61L155 94L151 94L158 69L154 69L160 51L157 51L163 34L168 51L165 51L171 69L167 69L175 94L163 94L173 63L167 63L175 41L171 41L178 21L185 41L181 41L188 63L183 63L192 94L180 94L189 62L184 62L191 39L187 39L194 18L201 39L197 39L205 62L200 62L209 94L202 94L211 66L206 66L213 47L209 47L216 28L223 47L219 47L226 66L221 66L230 94L220 94L229 69L224 69L231 51L227 51L234 34L241 51L237 51L244 69L239 69L248 94L241 94L247 60L244 60L248 36L246 36L250 13L254 36L252 36L256 60L253 60L259 94L254 94L264 58L258 58L266 32L262 32L269 8L276 32L272 32L279 58L274 58L284 94L274 94L280 69L277 69L282 50L279 50L283 33L288 50L285 50L290 69L287 69L293 94L287 94L294 70L290 70L296 52L293 52L298 36L304 52L301 52L307 70L303 70L310 94L306 94L313 60L309 60L315 36L312 36L317 13L323 36L320 36L326 60L322 60L329 94L319 94L325 71L322 71L327 54L324 54L329 39L334 54L331 54L336 71L332 71L339 94L331 94L337 64L334 64L339 43L336 43L341 23L346 43L343 43L348 64L345 64L351 94L344 94L353 57L348 57L355 31L351 31L357 6L364 31L360 31L367 57L362 57L371 94L359 94L366 68L362 68L368 50L365 50L370 33L375 50L372 50L378 68L374 68L381 94L375 94L384 68L379 68L387 49L383 49L390 32L397 49L393 49L400 68L395 68L400 94L398 94L400 71L400 71L400 54L400 54L400 39L400 54L400 54L400 71L400 71L400 94V100Z'/%3E%3C/svg%3E"); background-size: 1100px calc(100% - 120px); background-position: 180px 0; }
+.far::after, .near::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 121px; background: #030305; }
+.far::after { background: #121720; }
+.fogband { bottom: 0; height: 30vh; overflow: hidden; }
+.fogband b { position: absolute; inset: 0 auto 0 0; width: 200%;
+  background: radial-gradient(22% 45% at 25% 70%, rgba(150,160,180,.1), transparent 70%) 0 0 / 50% 100%, radial-gradient(28% 40% at 70% 80%, rgba(150,160,180,.08), transparent 70%) 0 0 / 50% 100%;
+  animation: fog 70s linear infinite; }
+/* Footer: the house at night; a window light switches on as you arrive, and someone is standing in it. */
+footer { padding-top: 12px; border-top: 0; }
+.scene { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 0 28px; margin: 0 auto 26px; }
+.house { width: min(300px, 78vw); height: auto; display: block; }
+.scene p { margin: 0 0 22px; max-width: 10em; text-align: left; font-style: italic; font-size: clamp(1.3rem, 3vw, 1.7rem); line-height: 1.3; color: var(--bone); }
+.house .win { opacity: 0; }
+html:not(.js) .house .win { opacity: 1; }
+.js footer.on .house .win { animation: switch-on 1.4s .8s both; }
+@keyframes switch-on { 0% { opacity: 0 } 30% { opacity: .9 } 45% { opacity: .15 } 70%, 100% { opacity: 1 } }
+.house .who { opacity: 0; transition: opacity 3s; }
+.js footer.on .house .who { opacity: .9; transition-delay: 5s; }
+footer nav { margin-top: 18px; }
+footer nav a { margin: 0 10px; font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; }
+footer nav a + a::before { content: ""; display: inline-block; width: 4px; height: 4px; margin: 0 20px 2px 0; border-radius: 50%; background: var(--blood); vertical-align: middle; }
+@media (max-width: 560px) { .scene p { text-align: center; margin-bottom: 8px; } }
 .js .case .no { transition: text-shadow 1.2s, color 1.2s; }
 .js .case.dev img { filter: saturate(.9) brightness(1); }
 .js .case.dev { animation: shudder .5s linear; }
@@ -145,5 +229,6 @@ footer nav a { margin: 0 12px; color: var(--ash); }
 @keyframes flicker-soft { 0%, 70%, 73%, 100% { opacity: 0 } 71% { opacity: .14 } }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  *:not(.case img, .gentle), *::before, *::after { animation: none !important; transition: none !important; }
+  .fx { display: none; }   /* reduced motion keeps only the slow drift of the case photos */
 }
