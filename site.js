@@ -40,8 +40,8 @@
     s.connect(f).connect(g).connect(ac.destination); s.start(t);
   };
   const btn = d.createElement('button');
-  btn.className = 'sound'; btn.type = 'button';
-  const label = () => { btn.setAttribute('aria-pressed', soundOn); btn.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/>' + (soundOn ? '<path d="M11 5.5a4 4 0 0 1 0 5M13 3.5a7 7 0 0 1 0 9"/>' : '<path d="M11 6l4 4M15 6l-4 4"/>') + '</svg>Sound ' + (soundOn ? 'on' : 'off'); };
+  btn.className = 'sound sound-main'; btn.type = 'button';
+  const label = () => { btn.setAttribute('aria-pressed', soundOn); btn.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10l-4-3H2z"/>' + (soundOn ? '<path d="M11 5.5a4 4 0 0 1 0 5M13 3.5a7 7 0 0 1 0 9"/>' : '<path d="M11 6l4 4M15 6l-4 4"/>') + '</svg>' + (soundOn ? 'Sound on' : 'Turn the sound on'); };
   btn.onclick = () => {
     if (!ac) {
       ac = new (window.AudioContext || window.webkitAudioContext)();

@@ -51,6 +51,7 @@ h1.title { margin: 0; font-weight: 400; font-size: clamp(2.6rem, 9vw, 5.6rem); l
 .tagline { margin: 0; color: var(--ash); font-size: clamp(1.1rem, 2.4vw, 1.4rem); }
 .enter { display: inline-block; margin-top: 30px; letter-spacing: .18em; font-size: 1.35rem; text-decoration: none; padding: 6px 12px; }
 .soon { margin: 26px 0 0; font-size: .95rem; color: var(--ash); }
+.soon a { color: var(--bone); }
 .stamp { display: inline-block; transform: rotate(-6deg); color: var(--blood-text); border-top: 2px solid var(--blood); border-bottom: 2px solid var(--blood); padding: 2px 12px; letter-spacing: .14em; margin-right: 10px; }
 
 /* Sections */
@@ -170,6 +171,13 @@ footer nav a { margin: 0 12px; color: var(--ash); }
 .js :is(.hero, footer, .case):not(.on) *, .js :is(.hero, footer, .case):not(.on) *::before, .js :is(.hero, footer, .case):not(.on) *::after,
 .calm *, .calm *::before, .calm *::after { animation-play-state: paused !important; }
 .sound.motion { margin-top: 14px; }
+/* The hero's sound toggle: the first thing to press. A red-rimmed pill that breathes until the sound is on. */
+.sound-main { margin-top: 26px; font-size: 1rem; letter-spacing: .12em; color: var(--bone); background: rgba(158,15,13,.16); border: 1px solid var(--blood-text); border-radius: 999px; padding: 11px 24px; box-shadow: 0 0 0 0 rgba(217,77,66,.45); animation: breathe 2.6s ease-in-out infinite; }
+.sound-main svg { width: 18px; height: 18px; vertical-align: -3px; margin-right: 10px; }
+.sound-main:hover { background: rgba(158,15,13,.32); color: #fff; }
+.sound-main[aria-pressed="true"] { animation: none; background: rgba(5,5,6,.6); border-color: var(--blood); color: var(--ash); }
+@keyframes breathe { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,77,66,.45); } 50% { box-shadow: 0 0 22px 4px rgba(217,77,66,.28); } }
+.calm .sound-main { animation: none; }
 .files { margin: 14px 0 0; font: .78rem/1 "Courier New", monospace; letter-spacing: .18em; color: rgba(219,214,204,.45); }
 .files i { display: inline-block; width: .55em; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--blood-text); animation: caret 1s steps(1) infinite; }
 @keyframes caret { 50% { opacity: 0 } }
