@@ -170,7 +170,7 @@
 
   // Map a point on the key art (0..1 of the picture) to the hero, matching object-fit: cover at 50% 35%.
   const artPoint = () => {
-    const tall = /tall/.test(hero.querySelector('img').currentSrc), w = tall ? 900 : 1600, h = tall ? 1593 : 904,
+    const tall = /tall/.test(hero.querySelector('img').currentSrc), w = tall ? 900 : 1600, h = tall ? 1593 : 905,
       W = hero.clientWidth, H = hero.clientHeight, s = Math.max(W / w, H / h);
     const [px, py] = tall ? [.13, .35] : [.7925, .492];
     return [px * w * s + (W - w * s) * .5, py * h * s + (H - h * s) * .35 + artShift, s];

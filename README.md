@@ -7,7 +7,7 @@
 <p align="center"><i>They were never invited in.</i></p>
 
 <p align="center">
-  Ten short horror stories for iPhone and iPad, each inspired by a real account.<br>
+  Short horror stories for iPhone and iPad, each inspired by a real account.<br>
   <b><a href="https://apps.apple.com/app/uninvited-presence/id6816024822">Free on the App Store</a>.</b>
 </p>
 
